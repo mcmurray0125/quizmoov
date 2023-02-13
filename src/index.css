@@ -1,6 +1,29 @@
 body {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
   background-color: rgb(21, 16, 11) !important;
   color: rgb(254, 233, 212) !important;
-  font-family: "Roboto Mono", "Times New Roman", Times, serif;
+  font-family: "Roboto Mono", "Times New Roman", Times, serif !important;
+}
+body a {
+  color: rgb(254, 233, 212) !important;
+}
+
+.dropdown-menu {
+  background-color: transparent !important;
+  border-radius: 0px !important;
+  border-color: rgb(254, 233, 212) !important;
+}
+.dropdown-divider {
+  border-color: rgb(254, 233, 212) !important;
+}
+.dropdown-item:hover {
+  background-color: transparent !important;
+  color: rgb(255, 138, 20) !important;
+}
+.nav-link {
+  border: rgb(254, 233, 212) 1px solid !important;
+}
+.nav-link:hover {
+  background-color: transparent !important;
+  color: rgb(255, 138, 20) !important;
 }
