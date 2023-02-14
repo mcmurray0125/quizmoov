@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import { nanoid } from "nanoid"
-import QuizCard from "./components/QuizCard"
 import movieQuotes from "movie-quotes"
 import { Container, Form } from "react-bootstrap"
 import Navigation from "./Navigation"
@@ -80,18 +79,24 @@ function selectMovie(key) {
       <Container className="text-center my-5">
       <h4 className="mb-5">What movie is this quote from?</h4>
       <h3 className="mb-5">{correctQuote}</h3> 
-        <Form>
-          {quiz && quiz.options.map((option) => (
-              <Form.Check 
-                type="radio"
-                name="group-1"
-                label={option.title}
-                key={option.key}
-                onChange={() => selectMovie(option.key)}
-                className={`${option.guessed ? 'selected-option' : 'option'}`}
-              />
-          ))}
-          </Form>
+      <Form className="text-center">
+        {quiz && quiz.options.map((option) => (
+          <div className="radio-btn my-3" key={option.key}>
+            <input
+              type="radio"
+              id={option.key}
+              name="group-1"
+              onChange={() => selectMovie(option.key)}
+              className="visually-hidden"
+              checked={option.guessed}
+            />
+            <label htmlFor={option.key} className={`option ${option.guessed ? 'selected-option' : ''}`}>
+              {option.title}
+            </label>
+          </div>
+        ))}
+        <button className="submit-btn my-3">Submit</button>
+      </Form>
       </Container>
     </>
   )

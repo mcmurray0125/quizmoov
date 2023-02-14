@@ -23,10 +23,42 @@ body a {
 .nav-link {
   border: rgb(254, 233, 212) 1px solid !important;
 }
+.navbar-brand {
+  color: rgb(255, 138, 20) !important;
+}
 .nav-link:hover {
   background-color: transparent !important;
   color: rgb(255, 138, 20) !important;
 }
+
+.option {
+  border: 1px solid rgb(254, 233, 212) !important;
+  color: rgb(254, 233, 212) !important;
+  height: 3rem !important;
+  line-height: 2.9rem !important;
+  width: 100%;
+  cursor: pointer !important;
+  transition: 0.2s !important;
+}
 .selected-option {
+  color: rgb(255, 138, 20) !important;
+  border-color: rgb(255, 138, 20) !important;
+}
+.radio-btn {
+  border: none;
+  cursor: pointer !important;
+}
+
+.submit-btn {
+  border: 1px solid rgb(255, 138, 20) !important;
+  color: rgb(254, 233, 212) !important;
+  background-color: transparent;
+  height: 3rem !important;
+  width: 35% !important;
+  min-width: auto !important;
+  cursor: pointer !important;
+  transition: 0.15s;
+}
+.submit-btn:active {
   color: rgb(255, 138, 20) !important;
 }
