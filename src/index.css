@@ -27,3 +27,6 @@ body a {
   background-color: transparent !important;
   color: rgb(255, 138, 20) !important;
 }
+.selected-option {
+  color: rgb(255, 138, 20) !important;
+}

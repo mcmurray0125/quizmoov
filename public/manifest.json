@@ -1,0 +1,25 @@
+{
+    "short_name": "MoovQuoter",
+    "name": "MoovQuoter",
+    "icons": [
+      {
+        "src": "quote-64.png",
+        "sizes": "64x64",
+        "type": "image/png"
+      },
+      {
+        "src": "quote-128.png",
+        "type": "image/png",
+        "sizes": "128x128"
+      },
+      {
+        "src": "quote-512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff"
+  }

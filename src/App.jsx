@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
 import { nanoid } from "nanoid"
+import QuizCard from "./components/QuizCard"
 import movieQuotes from "movie-quotes"
-import { Container } from "react-bootstrap"
+import { Container, Form } from "react-bootstrap"
 import Navigation from "./Navigation"
 
 function App() {
@@ -9,7 +10,7 @@ const [allQuotes, setAllQuotes] = useState(movieQuotes.all) //movieQuotes.all re
 const [options, setOptions] = useState([])
 const [correctMovie, setCorrectMovie] = useState("")
 const [correctQuote, setCorrectQuote] = useState("")
-const [quiz, setQuiz] = useState ({})
+const [quiz, setQuiz] = useState ()
 
 useEffect(() => {
   let selectedQuotes = []
@@ -39,32 +40,58 @@ useEffect(() => {
 },[correctMovie])
 
 useEffect(() => {
-console.log(options)
-console.log(correctQuote)
 console.log(quiz)
 },[quiz])
 
 useEffect(() => {
-  setQuiz({
-    correctMovie: correctMovie,
-    correctQuote: correctQuote,
-    options: options.map((option, index) => {
-      return {
-        title: option,
-        guessed: false,
-      };
-    }),
-    id: nanoid(),
-    correct: false,
-  });
-}, [correctQuote]);
+  if (correctQuote && options.length > 0) {
+    setQuiz({
+      correctMovie: correctMovie,
+      correctQuote: correctQuote,
+      options: options.map((option, index) => {
+        return {
+          title: option,
+          guessed: false,
+          key: index
+        };
+      }),
+      id: nanoid(),
+      correct: false,
+    });
+  }
+}, [correctQuote, options]);
+
+
+
+function selectMovie(key) {
+  setQuiz(oldQuiz => ({
+    ...oldQuiz,
+    options: oldQuiz.options.map(option => {
+      return option.key === key ? 
+          {...option, guessed: true} :
+          {...option, guessed: false}
+    })
+  }))
+}
 
   return (
     <>
       <Navigation/>
-      <Container className="text-center mt-5">
-        <h4 className="mb-5">What movie is this quote from?</h4>
-        <h3>{correctQuote}</h3>
+      <Container className="text-center my-5">
+      <h4 className="mb-5">What movie is this quote from?</h4>
+      <h3 className="mb-5">{correctQuote}</h3> 
+        <Form>
+          {quiz && quiz.options.map((option) => (
+              <Form.Check 
+                type="radio"
+                name="group-1"
+                label={option.title}
+                key={option.key}
+                onChange={() => selectMovie(option.key)}
+                className={`${option.guessed ? 'selected-option' : 'option'}`}
+              />
+          ))}
+          </Form>
       </Container>
     </>
   )

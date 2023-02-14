@@ -1,9 +1,11 @@
 import React from 'react'
-import Form from 'react-bootstrap';
+import { Form, Container } from 'react-bootstrap';
 
 
-export default function QuizCard(props) {
+export default function QuizCard({quiz}) {
   return (
-    <div>QuizCard</div>
+    <>
+
+    </>
   )
 }
