@@ -40,9 +40,19 @@ body a {
   cursor: pointer !important;
   transition: 0.2s !important;
 }
-.selected-option {
+.selected {
   color: rgb(255, 138, 20) !important;
   border-color: rgb(255, 138, 20) !important;
+}
+.correct {
+  background-color: rgb(0, 130, 33) !important;
+  border-color: rgb(254, 233, 212) !important;
+  color: rgb(254, 233, 212) !important;
+}
+.incorrect {
+  background-color: rgb(130, 28, 0) !important;
+  border-color: rgb(254, 233, 212) !important;
+  color: rgb(254, 233, 212) !important;
 }
 .radio-btn {
   border: none;

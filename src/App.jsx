@@ -9,7 +9,7 @@ const [allQuotes, setAllQuotes] = useState(movieQuotes.all) //movieQuotes.all re
 const [options, setOptions] = useState([])
 const [correctMovie, setCorrectMovie] = useState("")
 const [correctQuote, setCorrectQuote] = useState("")
-const [quiz, setQuiz] = useState ()
+const [quiz, setQuiz] = useState()
 
 useEffect(() => {
   let selectedQuotes = []
@@ -42,6 +42,7 @@ useEffect(() => {
 console.log(quiz)
 },[quiz])
 
+//Stores quiz data in Quiz State
 useEffect(() => {
   if (correctQuote && options.length > 0) {
     setQuiz({
@@ -51,17 +52,16 @@ useEffect(() => {
         return {
           title: option,
           guessed: false,
-          key: index
+          key: index,
+          correct: null
         };
       }),
       id: nanoid(),
-      correct: false,
     });
   }
 }, [correctQuote, options]);
 
-
-
+//Changes property of mulitple choice option when selected in radio group.
 function selectMovie(key) {
   setQuiz(oldQuiz => ({
     ...oldQuiz,
@@ -73,13 +73,52 @@ function selectMovie(key) {
   }))
 }
 
+function handleSubmit(event) {
+  event.preventDefault();
+  setQuiz((oldQuiz) => ({
+    ...oldQuiz,
+    options: oldQuiz.options.map((option) => {
+      if (correctMovie.includes(option.title)) {
+        return {
+          ...option,
+          correct: true,
+        };
+      } else if (option.guessed && !correctMovie.includes(option.title)) {
+        return {
+          ...option,
+          correct: false,
+        };
+      } else if (option.guessed && correctMovie.includes(option.title)) {
+        return {
+          ...option,
+          correct: true,
+        };
+      } else {
+        return option;
+      }
+    }),
+  }));
+}
+
+const getClassname = (option) => {
+  if (option.correct === true) {
+    return 'correct option';
+  } else if (option.correct === false && option.guessed) {
+    return 'incorrect option';
+  } else if (option.guessed) {
+    return 'selected option';
+  } else {
+    return 'option';
+  }
+};
+
   return (
     <>
       <Navigation/>
       <Container className="text-center my-5">
       <h4 className="mb-5">What movie is this quote from?</h4>
       <h3 className="mb-5">{correctQuote}</h3> 
-      <Form className="text-center">
+      <Form className="text-center" onSubmit={handleSubmit}>
         {quiz && quiz.options.map((option) => (
           <div className="radio-btn my-3" key={option.key}>
             <input
@@ -90,12 +129,12 @@ function selectMovie(key) {
               className="visually-hidden"
               checked={option.guessed}
             />
-            <label htmlFor={option.key} className={`option ${option.guessed ? 'selected-option' : ''}`}>
+            <label htmlFor={option.key} className={getClassname(option)}>
               {option.title}
             </label>
           </div>
         ))}
-        <button className="submit-btn my-3">Submit</button>
+        <button className="submit-btn my-3" type="submit">Submit</button>
       </Form>
       </Container>
     </>
