@@ -6,19 +6,19 @@ import { Container, Form } from "react-bootstrap"
 import Navigation from "./Navigation"
 
 function App() {
-const [allQuotes, setAllQuotes] = useState(movieQuotes.all) //movieQuotes.all returns an Array of 100 quotes + titles.
-const [options, setOptions] = useState([])
-const [correctMovie, setCorrectMovie] = useState("")
-const [correctQuote, setCorrectQuote] = useState("")
-const [quiz, setQuiz] = useState()
-const [winner, setWinner] = useState(false)
-const [checked, setChecked] = useState(false)
+  const [options, setOptions] = useState([])
+  const [correctMovie, setCorrectMovie] = useState("")
+  const [correctQuote, setCorrectQuote] = useState("")
+  const [quiz, setQuiz] = useState()
+  const [winner, setWinner] = useState(false)
+  const [checked, setChecked] = useState(false)
 
-useEffect(() => {
+const newQuote = () => {
+  const quotes = (movieQuotes.all)
   let selectedQuotes = []
   for (let i = 0; i < 4; i++) {
-    let randomQuotes = Math.floor(Math.random() * allQuotes.length);
-    selectedQuotes.push(allQuotes[randomQuotes]);
+    let randomQuotes = Math.floor(Math.random() * quotes.length);
+    selectedQuotes.push(quotes[randomQuotes]);
   }
   setCorrectMovie(selectedQuotes[0])
 
@@ -30,7 +30,9 @@ useEffect(() => {
 
   movieOptions.sort(() => Math.random() - 0.5);
   setOptions(movieOptions)
-}, [allQuotes])
+}
+
+const [allQuotes, setAllQuotes] = useState(newQuote) //movieQuotes.all returns an Array of 100 quotes + titles.
 
 
 
@@ -110,7 +112,7 @@ function handleSubmit(event) {
 function newQuiz(event) {
   event.preventDefault();
   setQuiz(null);
-  setAllQuotes(movieQuotes.all);
+  setAllQuotes(newQuote);
   setWinner(false);
   setChecked(false);
 }
@@ -126,6 +128,7 @@ const getClassname = (option) => {
     return 'option';
   }
 };
+
 
   return (
     <>
