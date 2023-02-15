@@ -1,7 +1,14 @@
 import React from 'react'
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap"
+import { useAuth } from './contexts/AuthContext'
 
 export default function Navigation() {
+  const { logout } = useAuth()
+
+  function handleLogout(e) {
+    logout()
+  }
+
   return (
     <Navbar collapseOnSelect expand="md" variant="dark" className="w-100 top-0 py-3" id="navbar" style={{zIndex: "100"}}>
       <Container>
@@ -19,6 +26,7 @@ export default function Navigation() {
               <NavDropdown.Divider />
               <NavDropdown.Item href="/login">Login</NavDropdown.Item>
               <NavDropdown.Item href="/signup">Signup</NavDropdown.Item>
+              <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

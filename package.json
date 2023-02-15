@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
+    "firebase": "^9.17.1",
     "movie-quotes": "^1.0.1",
     "nanoid": "^4.0.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.1",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.1",
     "react-tsparticles": "^2.9.3",
     "tsparticles": "^2.9.3"
   },
