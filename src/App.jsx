@@ -32,9 +32,7 @@ const newQuote = () => {
   setOptions(movieOptions)
 }
 
-const [allQuotes, setAllQuotes] = useState(newQuote) //movieQuotes.all returns an Array of 100 quotes + titles.
-
-
+const [allQuotes, setAllQuotes] = useState(newQuote)
 
 //Splits the chosen string to only display the quote. Title is removed from string.
 useEffect(() => {
@@ -129,7 +127,6 @@ const getClassname = (option) => {
   }
 };
 
-
   return (
     <>
       <Navigation/>
@@ -141,6 +138,7 @@ const getClassname = (option) => {
         {quiz && quiz.options.map((option) => (
           <div className="radio-btn my-3" key={option.key}>
             <input
+              disabled={checked ? true : false}
               type="radio"
               id={option.key}
               name="group-1"
