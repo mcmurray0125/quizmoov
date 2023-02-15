@@ -107,13 +107,21 @@ function handleSubmit(event) {
   }));
 }
 
+//Resets quiz States with slide animation.
 function newQuiz(event) {
   event.preventDefault();
-  setQuiz(null);
-  setAllQuotes(newQuote);
-  setWinner(false);
-  setChecked(false);
+  const quizSection = document.querySelector('.quiz');
+  quizSection.classList.add('slide-out');
+  setTimeout(() => {
+    setQuiz(null);
+    setAllQuotes(newQuote);
+    setWinner(false);
+    setChecked(false);
+    quizSection.classList.remove('slide-out');
+  }, 1000);
 }
+
+
 
 const getClassname = (option) => {
   if (option.correct === true) {
@@ -133,26 +141,28 @@ const getClassname = (option) => {
       {winner && <ParticlesBackground />}
       <Container className="text-center my-5">
       <h4 className="mb-5">What movie is this quote from?</h4>
-      <h3 className="mb-5">{correctQuote}</h3> 
-      <Form className="text-center" onSubmit={checked ? newQuiz : handleSubmit}>
-        {quiz && quiz.options.map((option) => (
-          <div className="radio-btn my-3" key={option.key}>
-            <input
-              disabled={checked ? true : false}
-              type="radio"
-              id={option.key}
-              name="group-1"
-              onChange={() => selectMovie(option.key)}
-              className="visually-hidden"
-              checked={option.guessed}
-            />
-            <label htmlFor={option.key} className={getClassname(option)}>
-              {option.title}
-            </label>
-          </div>
-        ))}
-        <button className="submit-btn my-3" type="submit">{checked ? 'Next Quote' : 'Submit'}</button>
-      </Form>
+      <section className="quiz">
+        <h3 className="mb-5">{correctQuote}</h3> 
+        <Form className="text-center" onSubmit={checked ? newQuiz : handleSubmit}>
+          {quiz && quiz.options.map((option) => (
+            <div className="radio-btn my-3" key={option.key}>
+              <input
+                disabled={checked ? true : false}
+                type="radio"
+                id={option.key}
+                name="group-1"
+                onChange={() => selectMovie(option.key)}
+                className="visually-hidden"
+                checked={option.guessed}
+              />
+              <label htmlFor={option.key} className={getClassname(option)}>
+                {option.title}
+              </label>
+            </div>
+          ))}
+          <button className="submit-btn my-3" type="submit">{checked ? 'Next Quote' : 'Submit'}</button>
+        </Form>
+      </section>
       </Container>
     </>
   )
