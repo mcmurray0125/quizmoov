@@ -12,6 +12,7 @@ function App() {
   const [quiz, setQuiz] = useState()
   const [winner, setWinner] = useState(false)
   const [checked, setChecked] = useState(false)
+  const [message, setMessage] = useState("")
 
 const newQuote = () => {
   const quotes = (movieQuotes.all)
@@ -89,6 +90,7 @@ function handleSubmit(event) {
           correct: true,
         };
       } else if (option.guessed && !correctMovie.includes(option.title)) {
+        setMessage("Sorry, that's not correct.")
         return {
           ...option,
           correct: false,
@@ -96,6 +98,7 @@ function handleSubmit(event) {
       } else if (option.guessed && correctMovie.includes(option.title)) {
         console.log("winner")
         setWinner(true)
+        setMessage("Nice! You got it!")
         return {
           ...option,
           correct: true,
@@ -118,7 +121,7 @@ function newQuiz(event) {
     setWinner(false);
     setChecked(false);
     quizSection.classList.remove('slide-out');
-  }, 1000);
+  }, 700);
 }
 
 
@@ -160,7 +163,8 @@ const getClassname = (option) => {
               </label>
             </div>
           ))}
-          <button className="submit-btn my-3" type="submit">{checked ? 'Next Quote' : 'Submit'}</button>
+          {checked && <p className="my-4" style={{color: winner ? 'rgb(51, 206, 90)' : 'rgb(220, 89, 53)'}}>{message}</p>}
+          <button className="submit-btn" type="submit">{checked ? 'Next Quote' : 'Submit'}</button>
         </Form>
       </section>
       </Container>

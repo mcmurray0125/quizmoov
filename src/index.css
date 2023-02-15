@@ -3,6 +3,7 @@ body {
   background-color: rgb(21, 16, 11) !important;
   color: rgb(254, 233, 212) !important;
   font-family: "Roboto Mono", "Times New Roman", Times, serif !important;
+  overflow: hidden;
 }
 body a {
   color: rgb(254, 233, 212) !important;
@@ -74,7 +75,7 @@ body a {
 }
 
 .quiz {
-  transition: 0.5s;
+  transition: 0.35s;
 }
 
 .slide-out {
