@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { nanoid } from "nanoid"
 import movieQuotes from "movie-quotes"
+import ParticlesBackground from "./components/ParticlesBackground"
 import { Container, Form } from "react-bootstrap"
 import Navigation from "./Navigation"
 
@@ -10,6 +11,8 @@ const [options, setOptions] = useState([])
 const [correctMovie, setCorrectMovie] = useState("")
 const [correctQuote, setCorrectQuote] = useState("")
 const [quiz, setQuiz] = useState()
+const [winner, setWinner] = useState(false)
+const [checked, setChecked] = useState(false)
 
 useEffect(() => {
   let selectedQuotes = []
@@ -27,7 +30,7 @@ useEffect(() => {
 
   movieOptions.sort(() => Math.random() - 0.5);
   setOptions(movieOptions)
-}, [])
+}, [allQuotes])
 
 
 
@@ -59,26 +62,28 @@ useEffect(() => {
       id: nanoid(),
     });
   }
-}, [correctQuote, options]);
+}, [correctQuote, options, allQuotes]);
 
 //Changes property of mulitple choice option when selected in radio group.
 function selectMovie(key) {
-  setQuiz(oldQuiz => ({
+  setQuiz((oldQuiz) => ({
     ...oldQuiz,
-    options: oldQuiz.options.map(option => {
-      return option.key === key ? 
-          {...option, guessed: true} :
-          {...option, guessed: false}
-    })
-  }))
+    options: oldQuiz.options.map((option) =>
+      option.key === key
+        ? { ...option, guessed: true }
+        : { ...option, guessed: false }
+    ),
+  }));
 }
+
 
 function handleSubmit(event) {
   event.preventDefault();
+  setChecked(true)
   setQuiz((oldQuiz) => ({
     ...oldQuiz,
     options: oldQuiz.options.map((option) => {
-      if (correctMovie.includes(option.title)) {
+      if (!option.guessed && correctMovie.includes(option.title)) {
         return {
           ...option,
           correct: true,
@@ -89,6 +94,8 @@ function handleSubmit(event) {
           correct: false,
         };
       } else if (option.guessed && correctMovie.includes(option.title)) {
+        console.log("winner")
+        setWinner(true)
         return {
           ...option,
           correct: true,
@@ -98,6 +105,14 @@ function handleSubmit(event) {
       }
     }),
   }));
+}
+
+function newQuiz(event) {
+  event.preventDefault();
+  setQuiz(null);
+  setAllQuotes(movieQuotes.all);
+  setWinner(false);
+  setChecked(false);
 }
 
 const getClassname = (option) => {
@@ -115,10 +130,11 @@ const getClassname = (option) => {
   return (
     <>
       <Navigation/>
+      {winner && <ParticlesBackground />}
       <Container className="text-center my-5">
       <h4 className="mb-5">What movie is this quote from?</h4>
       <h3 className="mb-5">{correctQuote}</h3> 
-      <Form className="text-center" onSubmit={handleSubmit}>
+      <Form className="text-center" onSubmit={checked ? newQuiz : handleSubmit}>
         {quiz && quiz.options.map((option) => (
           <div className="radio-btn my-3" key={option.key}>
             <input
@@ -134,7 +150,7 @@ const getClassname = (option) => {
             </label>
           </div>
         ))}
-        <button className="submit-btn my-3" type="submit">Submit</button>
+        <button className="submit-btn my-3" type="submit">{checked ? 'Next Quote' : 'Submit'}</button>
       </Form>
       </Container>
     </>
