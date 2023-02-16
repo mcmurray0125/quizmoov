@@ -2,6 +2,8 @@
   --orange-color: rgb(255, 138, 20);
   --text-color: rgb(254, 233, 212);
   --bg-color: rgb(21, 16, 11);
+  --incorrect-color: rgb(130, 28, 0);
+  --correct-color: rgb(0, 130, 33);
 }
 body {
   box-sizing: border-box !important;

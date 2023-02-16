@@ -19,6 +19,7 @@ export default function Navigation() {
             <Nav.Link href="/leaderboards">Leaderboards</Nav.Link>
           </Nav>
           <Nav >
+            <Nav.Link href="/">Play</Nav.Link>
             <Nav.Link href="/results">Results</Nav.Link>
             <NavDropdown title="Profile" id="collasible-nav-dropdown">
               <NavDropdown.Item eventKey={2} href="/profile">My Account</NavDropdown.Item>
