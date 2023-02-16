@@ -121,3 +121,23 @@ body a {
 .slide-in {
   transform: translateX(0);
 }
+
+.results-header {
+  margin-top: 3rem !important;
+  margin-bottom: 3rem !important;
+}
+
+.bar-graph {
+  border: 1px solid var(--text-color);
+  padding: 0.5rem;
+}
+@media screen and (max-width: 770px) {
+  .results-header {
+    flex-direction: column-reverse !important;
+    margin-top: 0 !important;
+    margin-bottom: 1.7rem !important;
+  }
+  .bar-graph {
+    margin: 1rem 0 !important;
+  }
+}
