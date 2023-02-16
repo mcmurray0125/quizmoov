@@ -12,7 +12,7 @@ export default function Navigation() {
   return (
     <Navbar collapseOnSelect expand="md" variant="dark" className="w-100 top-0 py-3" id="navbar" style={{zIndex: "100"}}>
       <Container>
-        <Navbar.Brand href="/">QuizMoov</Navbar.Brand>
+        <Navbar.Brand href="/">" QuizMoov "</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">

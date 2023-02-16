@@ -3,9 +3,14 @@ import { nanoid } from "nanoid"
 import movieQuotes from "movie-quotes"
 import ParticlesBackground from "./components/ParticlesBackground"
 import { Container, Form } from "react-bootstrap"
+import { db } from "./firebase"
+import { useAuth } from './contexts/AuthContext'
+import { doc, updateDoc, arrayUnion, increment } from "firebase/firestore";
 import Navigation from "./Navigation"
 
 function Quiz() {
+  const { currentUser } = useAuth()
+  const [loading, setLoading] = useState(false)
   const [options, setOptions] = useState([])
   const [correctMovie, setCorrectMovie] = useState("")
   const [correctQuote, setCorrectQuote] = useState("")
@@ -13,7 +18,10 @@ function Quiz() {
   const [winner, setWinner] = useState(false)
   const [checked, setChecked] = useState(false)
   const [message, setMessage] = useState("")
+  const [updatedQuiz, setUpdatedQuiz] = useState(false);
 
+//Gets new movies + quotes. Sets one as the correct answer.
+//Scrambles the movies and sets the to the Options (multiple choice) State.
 const newQuote = () => {
   const quotes = (movieQuotes.all)
   let selectedQuotes = []
@@ -36,6 +44,8 @@ const newQuote = () => {
 const [allQuotes, setAllQuotes] = useState(newQuote)
 
 //Splits the chosen string to only display the quote. Title is removed from string.
+//Sets the formatted quote as the correctQuote.
+//correctQuote is displayed on on the quiz.
 useEffect(() => {
   let str = correctMovie;
   let lastIndex = str.lastIndexOf('" ');
@@ -46,7 +56,7 @@ useEffect(() => {
 console.log(quiz)
 },[quiz])
 
-//Stores quiz data in Quiz State
+//Sets initial quiz data in Quiz State
 useEffect(() => {
   if (correctQuote && options.length > 0) {
     setQuiz({
@@ -60,6 +70,7 @@ useEffect(() => {
           correct: null
         };
       }),
+      win: false,
       id: nanoid(),
     });
   }
@@ -77,7 +88,25 @@ function selectMovie(key) {
   }));
 }
 
+//Adds Submitted Quiz to firestore doc
+const addQuizToFirestore = async () => {
+  const savedRef = doc(db, "users", currentUser.uid);
+  const quizRef = JSON.stringify(quiz);
+  setLoading(true);
+    try {
+      await updateDoc(savedRef, {
+      quizzes: arrayUnion(quizRef),
+      totalQuizzes: increment(1),
+      wins: increment(winner ? 1 : 0)
+    });
+  } catch(error) {
+    console.log(error)
+  }
+  setLoading(false)
+  setUpdatedQuiz(false)
+}
 
+//updates Quiz movie options & sets a Winning State
 function handleSubmit(event) {
   event.preventDefault();
   setChecked(true)
@@ -110,7 +139,26 @@ function handleSubmit(event) {
   }));
 }
 
-//Resets quiz States with slide animation.
+//Sets win property for the Quiz
+useEffect(() => {
+  if (checked) {
+    setQuiz((oldQuiz) => ({
+      ...oldQuiz,
+      win: winner,
+    }));
+    setUpdatedQuiz(true)
+  }
+}, [checked]);
+
+//The updated Quiz is ready to be sent to Firestore database.
+useEffect(() => {
+  if (updatedQuiz) {
+    addQuizToFirestore();
+  }
+}, [updatedQuiz]);
+
+
+//Resets quiz with slide animation.
 function newQuiz(event) {
   event.preventDefault();
   const quizSection = document.querySelector('.quiz');
@@ -124,8 +172,7 @@ function newQuiz(event) {
   }, 700);
 }
 
-
-
+//Class names for multiple choice opitons. Controls color.
 const getClassname = (option) => {
   if (option.correct === true) {
     return 'correct option';
