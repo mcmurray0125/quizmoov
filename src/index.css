@@ -1,59 +1,71 @@
+:root {
+  --orange-color: rgb(255, 138, 20);
+  --text-color: rgb(254, 233, 212);
+  --bg-color: rgb(21, 16, 11);
+}
 body {
   box-sizing: border-box !important;
-  background-color: rgb(21, 16, 11) !important;
-  color: rgb(254, 233, 212) !important;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
   font-family: "Roboto Mono", "Times New Roman", Times, serif !important;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 body a {
-  color: rgb(254, 233, 212) !important;
+  color: var(--text-color) !important;
 }
 
 .dropdown-menu {
-  background-color: transparent !important;
+  background-color: var(--bg-color) !important;
   border-radius: 0px !important;
-  border-color: rgb(254, 233, 212) !important;
+  border-color: var(--text-color) !important;
 }
 .dropdown-divider {
-  border-color: rgb(254, 233, 212) !important;
+  border-color: var(--text-color) !important;
 }
 .dropdown-item:hover {
   background-color: transparent !important;
-  color: rgb(255, 138, 20) !important;
+  color: var(--orange-color) !important;
 }
 .nav-link {
-  border: rgb(254, 233, 212) 1px solid !important;
+  border: var(--text-color) 1px solid !important;
 }
 .navbar-brand {
-  color: rgb(255, 138, 20) !important;
+  color: var(--orange-color) !important;
 }
 .nav-link:hover {
   background-color: transparent !important;
-  color: rgb(255, 138, 20) !important;
+  color: var(--orange-color) !important;
 }
 
 .option {
-  border: 1px solid rgb(254, 233, 212) !important;
-  color: rgb(254, 233, 212) !important;
+  border: 1px solid var(--text-color) !important;
+  color: var(--text-color) !important;
   height: 3rem !important;
   line-height: 2.9rem !important;
   width: 100%;
   cursor: pointer !important;
   transition: 0.2s !important;
 }
+.option:hover {
+  color: rgb(255, 179, 102) !important;
+}
+.option:active {
+  border-color: var(--orange-color) !important;
+  color: var(--orange-color) !important;
+}
 .selected {
-  color: rgb(255, 138, 20) !important;
-  border-color: rgb(255, 138, 20) !important;
+  color: var(--orange-color) !important;
+  border-color: var(--orange-color) !important;
 }
 .correct {
   background-color: rgb(0, 130, 33) !important;
-  border-color: rgb(254, 233, 212) !important;
-  color: rgb(254, 233, 212) !important;
+  border-color: var(--text-color) !important;
+  color: var(--text-color) !important;
 }
 .incorrect {
   background-color: rgb(130, 28, 0) !important;
-  border-color: rgb(254, 233, 212) !important;
-  color: rgb(254, 233, 212) !important;
+  border-color: var(--text-color) !important;
+  color: var(--text-color) !important;
 }
 .radio-btn {
   border: none;
@@ -61,8 +73,8 @@ body a {
 }
 
 .submit-btn {
-  border: 1px solid rgb(255, 138, 20) !important;
-  color: rgb(254, 233, 212) !important;
+  border: 1px solid var(--orange-color) !important;
+  color: var(--text-color) !important;
   background-color: transparent;
   height: 3rem !important;
   width: 35% !important;
@@ -71,9 +83,31 @@ body a {
   transition: 0.15s;
 }
 .submit-btn:active {
-  color: rgb(255, 138, 20) !important;
+  color: var(--orange-color) !important;
 }
-
+.login-button {
+  border: 1px solid var(--text-color) !important;
+  color: var(--text-color) !important;
+  height: 3rem !important;
+  line-height: 2.9rem !important;
+  width: 350px;
+  cursor: pointer !important;
+  transition: 0.2s !important;
+}
+.login-button:hover {
+  border-color: var(--orange-color) !important;
+  color: var(--orange-color) !important;
+}
+.login-button i {
+  color: var(--text-color) !important;
+  font-style: normal;
+}
+.banner-logo {
+  width: 800px !important;
+}
+.login-message {
+  color: var(--orange-color) !important;
+}
 .quiz {
   transition: 0.35s;
 }

@@ -66,8 +66,9 @@ export function AuthProvider({ children }) {
            } else {
               try {
                 await setDoc(doc(db, "users", currentUser.uid), {
-                    saved: [],
-                    comments: []
+                    quizzes: [],
+                    totalQuizzes: 0,
+                    wins: 0
                   })
             } catch(error) {
                 console.log(error)
