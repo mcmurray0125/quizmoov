@@ -98,11 +98,13 @@ export default function Results() {
             </div>
             <p className="m-0" style={{color: "var(--orange-color)"}}>My score: <span style={{color: "var(--text-color)", whiteSpace: "nowrap"}}>{wins} / {total}</span></p>
         </header>
+        <section className="d-flex flex-column-reverse">
         {parsedQuizzes.map((quiz, index) => {
               return (
                   <QuizResult {...quiz} quiz={quiz} key={index}/>
                 )
               })}
+        </section>
     </Container>
     </>
   )

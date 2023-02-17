@@ -15,16 +15,16 @@ export default function QuizResult({quiz, correctMovie, correctQuote, id, option
   };
 
   return (
-    <>
-    <div className='my-2 d-flex align-items-center gap-3'>
-      <h4 className='m-0'>{correctQuote}</h4>
-      {win ? <i className="fa-solid fa-check fs-2" style={{color: "var(--correct-color)"}}></i> : <i className="fa-solid fa-xmark fs-2" style={{color: "var(--incorrect-color)"}}></i>}
+    <div className='quiz-result'>
+      <div className='my-2 d-flex align-items-center gap-3'>
+        <h4 className='m-0'>{correctQuote}</h4>
+        {win ? <i className="fa-solid fa-check fs-2" style={{color: "var(--correct-color)"}}></i> : <i className="fa-solid fa-xmark fs-2" style={{color: "var(--incorrect-color)"}}></i>}
+      </div>
+        {options.map((option, index) => {
+            return (
+              <p className={getClassname(option)} key={index}>{option.title}</p>
+              )
+        })}
     </div>
-      {options.map((option, index) => {
-          return (
-            <p className={getClassname(option)} key={index}>{option.title}</p>
-            )
-      })}
-    </>
   )
 }
