@@ -86,12 +86,6 @@ export default function Results() {
         })
       }, [quizzes]);
 
-      //Test
-      useEffect(() => {
-        console.log(parsedQuizzes)
-        console.log(wins)
-        console.log(total)
-      },[parsedQuizzes, wins, total])
 
   return (
     <>

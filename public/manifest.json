@@ -8,9 +8,9 @@
         "type": "image/png"
       },
       {
-        "src": "quote-128.png",
+        "src": "quote-192.png",
         "type": "image/png",
-        "sizes": "128x128"
+        "sizes": "192x192"
       },
       {
         "src": "quote-512.png",

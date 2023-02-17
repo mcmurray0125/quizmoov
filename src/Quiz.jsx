@@ -52,9 +52,6 @@ useEffect(() => {
   setCorrectQuote(str.substring(0, lastIndex + 2))
 },[correctMovie])
 
-useEffect(() => {
-console.log(quiz)
-},[quiz])
 
 //Sets initial quiz data in Quiz State
 useEffect(() => {

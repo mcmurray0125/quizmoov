@@ -5,28 +5,28 @@ import { Container, Image } from 'react-bootstrap'
 import bannerLogo from "../assets/banner-logo.png"
 
 export default function Login() {
-    const { loginGoogle, loginDemo, redirectResult, currentUser } = useAuth()
+    const { loginGoogle, loginDemo, getRedirect, currentUser } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState()
     const navigate = useNavigate()
-
-    //Sign Up Email and Password
+    
+    //Checks for Google Login result.
+    getRedirect();
+    
+    //Sign in with Google.
     async function handleGoogleLogin(e) {
         e.preventDefault()
         try {
             setError('')
-            setLoading(true)
             await loginGoogle()
         } catch(error) {
             setError('Failed to create an account')
             console.log(error)
         }
-        setLoading(false)
     }
 
-
-    //Login Demo
+    //Login as Demo user
     async function handleDemoSubmit(e) {
         e.preventDefault()
 

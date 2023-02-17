@@ -14,13 +14,21 @@ export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
     const [hasFolder, setHasFolder] = useState(false)
+    const navigate = useNavigate()
 
 
+    //Log in user with Google. Redirects away from your page.
      async function loginGoogle() {
-        // This will trigger a full page redirect away from your app
         await signInWithRedirect(auth, provider);
-        await getRedirectResult(auth);
       return
+    }
+
+    //Checks for provider login result on page reload
+    async function getRedirect(){
+      const result = await getRedirectResult(auth);
+        if (result) {
+          navigate('/')
+        }
     }
 
   
@@ -44,7 +52,6 @@ export function AuthProvider({ children }) {
          const unsubscribe = auth.onAuthStateChanged(user => {
            setCurrentUser(user)
            setLoading(false)
-           console.log(user.uid)
          })
          return unsubscribe
        }, [])
@@ -77,6 +84,7 @@ export function AuthProvider({ children }) {
         loading,
         currentUser,
         loginGoogle,
+        getRedirect,
         loginDemo,
         logout,
         upgradeDemo,
