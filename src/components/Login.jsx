@@ -20,6 +20,7 @@ export default function Login() {
         try {
             setError('')
             await loginGoogle()
+            getRedirect();
         } catch(error) {
             setError('Failed to create an account')
             console.log(error)
