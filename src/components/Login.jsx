@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from "react-router-dom"
 import { Container, Image } from 'react-bootstrap'
 import bannerLogo from "../assets/banner-logo.png"
 
-
-export default function Signup() {
-    const { loginGoogle, loginDemo, currentUser } = useAuth()
+export default function Login() {
+    const { loginGoogle, loginDemo, redirectResult, currentUser } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState()
@@ -19,13 +18,14 @@ export default function Signup() {
             setError('')
             setLoading(true)
             await loginGoogle()
-            navigate("/")
         } catch(error) {
             setError('Failed to create an account')
             console.log(error)
         }
         setLoading(false)
     }
+
+
     //Login Demo
     async function handleDemoSubmit(e) {
         e.preventDefault()

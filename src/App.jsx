@@ -14,7 +14,7 @@ function App() {
             <AuthProvider>
               <Routes>
                 <Route exact path='/' element={<PrivateRoute><Quiz/></PrivateRoute>} />
-                <Route exact path='results' element={<PrivateRoute><Results/></PrivateRoute>} />
+                <Route path='/results' element={<PrivateRoute><Results/></PrivateRoute>} />
                 <Route path='/login' element={<Login/>} />
               </Routes>
             </AuthProvider>

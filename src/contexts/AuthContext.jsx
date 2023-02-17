@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { auth, db, provider } from "../firebase"
 import { doc, setDoc, getDoc } from "firebase/firestore"
-import { getAuth, signInAnonymously, signOut, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, linkWithCredential, EmailAuthProvider } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
+import { getAuth, signInAnonymously, signOut, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult,  onAuthStateChanged, linkWithCredential, EmailAuthProvider } from "firebase/auth";
 
 const AuthContext = React.createContext()
 
@@ -15,21 +16,14 @@ export function AuthProvider({ children }) {
     const [hasFolder, setHasFolder] = useState(false)
 
 
-    function loginGoogle() {
-        return signInWithPopup(auth, provider)
-        .then((result) => {
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          const credential = GoogleAuthProvider.credentialFromResult(result);
-          const token = credential.accessToken;
-          // The signed-in user info.
-          const user = result.user;
-          // IdP data available using getAdditionalUserInfo(result)
-          console.log(user)
-        }).catch((error) => {
-          console.log(error)
-        });
+     async function loginGoogle() {
+        // This will trigger a full page redirect away from your app
+        await signInWithRedirect(auth, provider);
+        await getRedirectResult(auth);
+      return
     }
 
+  
     function loginDemo() {
       return (
         signInAnonymously(auth)
@@ -50,8 +44,8 @@ export function AuthProvider({ children }) {
          const unsubscribe = auth.onAuthStateChanged(user => {
            setCurrentUser(user)
            setLoading(false)
+           console.log(user.uid)
          })
-    
          return unsubscribe
        }, [])
 
