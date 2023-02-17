@@ -19,12 +19,14 @@ export default function Login() {
         e.preventDefault()
         try {
             setError('')
+            setLoading(true)
             await loginGoogle()
-            getRedirect();
+            navigate("/")
         } catch(error) {
             setError('Failed to create an account')
             console.log(error)
         }
+        setLoading(false)
     }
 
     //Login as Demo user

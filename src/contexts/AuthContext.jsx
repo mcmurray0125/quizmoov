@@ -18,14 +18,20 @@ export function AuthProvider({ children }) {
 
 
     //Log in user with Google. Redirects away from your page.
-     async function loginGoogle() {
-        await signInWithRedirect(auth, provider);
-        const result = await getRedirectResult(auth);
-        if (result) {
-          navigate('/')
-        }
-      return
-    }
+    async function loginGoogle() {
+      try {
+        const result = await signInWithPopup(auth, provider);
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        console.log(user);
+      } catch (error) {
+        console.log(error);
+      }
+  }
 
     //Checks for provider login result on page reload
     async function getRedirect(){
