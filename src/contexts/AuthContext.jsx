@@ -20,6 +20,10 @@ export function AuthProvider({ children }) {
     //Log in user with Google. Redirects away from your page.
      async function loginGoogle() {
         await signInWithRedirect(auth, provider);
+        const result = await getRedirectResult(auth);
+        if (result) {
+          navigate('/')
+        }
       return
     }
 
