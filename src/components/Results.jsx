@@ -15,6 +15,7 @@ export default function Results() {
     const [total, setTotal] = useState(0)
     const [parsedQuizzes, setParsedQuizzes] = useState([])
     const [filteredQuizzes, setFilteredQuizzes] = useState(parsedQuizzes)
+    //userData state for Chart.js bar graph
     const [userData, setUserData] = useState({
       labels: ["Correct", "Incorrect", "Total"],
       datasets: [{
@@ -22,7 +23,8 @@ export default function Results() {
         data: [wins, total - wins, total]
       }]
     })
-
+    
+    //options for chart.js bar graph
     const options = {
       plugins: {  // 'legend' now within object 'plugins {}'
         legend: {
@@ -91,7 +93,7 @@ export default function Results() {
     <>
     <Navigation />
     <Container>
-        <header className="d-flex align-items-center justify-content-between results-header">
+        <header className="d-flex justify-content-between results-header">
             <h2 className="fs-2 m-0">My Quizzes:</h2>
             <div style={{width: "300px"}} className="bar-graph">
               <Bar data={userData} options={options}/>
@@ -105,6 +107,9 @@ export default function Results() {
                 )
               })}
         </section>
+        <div className="d-flex align-items-center justify-content-end my-4">
+          <a href="#" className="nav-link p-1">Back to top</a>
+        </div>
     </Container>
     </>
   )

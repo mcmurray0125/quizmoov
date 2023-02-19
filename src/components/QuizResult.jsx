@@ -4,20 +4,20 @@ export default function QuizResult({quiz, correctMovie, correctQuote, id, option
 
   const getClassname = (option) => {
     if (option.correct === true) {
-      return 'correct option';
+      return 'correct result';
     } else if (option.correct === false && option.guessed) {
-      return 'incorrect option';
+      return 'incorrect result';
     } else if (option.guessed) {
-      return 'selected option';
+      return 'selected result';
     } else {
-      return 'option';
+      return 'result';
     }
   };
 
   return (
     <div className='quiz-result'>
-      <div className='my-2 d-flex align-items-center gap-3'>
-        <h4 className='m-0'>{correctQuote}</h4>
+      <div className='my-2 d-flex align-items-center justify-content-between'>
+        <h5 className='m-0'>{correctQuote}</h5>
         {win ? <i className="fa-solid fa-check fs-2" style={{color: "var(--correct-color)"}}></i> : <i className="fa-solid fa-xmark fs-2" style={{color: "var(--incorrect-color)"}}></i>}
       </div>
         {options.map((option, index) => {
