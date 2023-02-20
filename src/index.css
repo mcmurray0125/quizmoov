@@ -30,6 +30,7 @@ body a {
 }
 .nav-link {
   border: var(--text-color) 1px solid !important;
+  cursor: pointer;
 }
 .navbar-brand {
   color: var(--orange-color) !important;

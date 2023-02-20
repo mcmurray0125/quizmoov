@@ -16,13 +16,13 @@ export default function Navigation() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/leaderboards">Leaderboards</Nav.Link>
+            <Nav.Link href="/friends">Friends</Nav.Link>
           </Nav>
           <Nav >
             <Nav.Link href="/">Play</Nav.Link>
             <Nav.Link href="/results">Results</Nav.Link>
             <NavDropdown title="Profile" id="collasible-nav-dropdown">
-              <NavDropdown.Item eventKey={2} href="/profile">My Account</NavDropdown.Item>
+              <NavDropdown.Item eventKey={2} href="/account">My Account</NavDropdown.Item>
               <NavDropdown.Item href="/results">Results</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="/login">Login</NavDropdown.Item>
