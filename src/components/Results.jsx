@@ -14,8 +14,10 @@ export default function Results() {
     const [wins, setWins] = useState(0)
     const [total, setTotal] = useState(0)
     const [parsedQuizzes, setParsedQuizzes] = useState([])
-    const [filteredQuizzes, setFilteredQuizzes] = useState(parsedQuizzes)
+    const [filter, setFilter] = useState("all")
     //userData state for Chart.js bar graph
+    const orderRef= useRef();
+    const filterRef= useRef();
     const [userData, setUserData] = useState({
       labels: ["Correct", "Incorrect", "Total"],
       datasets: [{
@@ -23,7 +25,6 @@ export default function Results() {
         data: [wins, total - wins, total]
       }]
     })
-    const orderRef= useRef();
     
     //options for chart.js bar graph
     const options = {
@@ -101,6 +102,20 @@ export default function Results() {
         }
       }
 
+      //Changes filter state to filter quizzes by Correct, Incorrect, or All quizzes.
+      function handleFilterChange() {
+        if (filterRef.current.value === "all") {
+          setFilter("all")
+        }
+        if (filterRef.current.value === "correct") {
+          setFilter("correct")
+        }
+        if (filterRef.current.value === "incorrect") {
+          setFilter("incorrect")
+        }
+      }
+
+
 
   return (
     <>
@@ -111,29 +126,27 @@ export default function Results() {
             <div style={{width: "300px"}} className="bar-graph">
               <Bar data={userData} options={options}/>
             </div>
-            <p className="m-0" style={{color: "var(--orange-color)"}}>My score: <span style={{color: "var(--text-color)", whiteSpace: "nowrap"}}>{wins} / {total}</span></p>
+            <p className="m-0" style={{color: "var(--orange-color)"}}>My score: <span style={{color: "var(--text-color)", whiteSpace: "nowrap"}}>{total>0 ? `${((wins / total) * 100).toFixed(2)}%`: 'No Quizzes taken.'}</span></p>
         </header>
         <section className="sort-wrapper d-flex justify-content-end gap-2">
-          <Form.Group className="mb-2">
-            <Form.Label>Order</Form.Label>
-            <Form.Select ref={orderRef} onChange={handleOrderChange}>
+          <Form.Group className="mb-2">      
+            <Form.Select ref={orderRef} onChange={handleOrderChange} className="quiz-filters">
               <option value="recent">Most Recent</option>
               <option value="oldest">Oldest</option>
             </Form.Select>
           </Form.Group>
-          <Form.Group className="mb-2">
-            <Form.Label>Filter by</Form.Label>
-            <Form.Select >
+          <Form.Group className="mb-2">    
+            <Form.Select ref={filterRef} onChange={handleFilterChange} className="quiz-filters">
               <option value="all">All</option>
-              <option value="correct">Correct</option>
-              <option value="incorrect">Incorrect</option>
+              <option value="correct">Correct ({wins})</option>
+              <option value="incorrect">Incorrect ({total-wins})</option>
             </Form.Select>
           </Form.Group>
         </section>
         <section className="d-flex flex-column-reverse" id="results-section">
         {parsedQuizzes.map((quiz, index) => {
               return (
-                  <QuizResult {...quiz} quiz={quiz} key={index}/>
+                  <QuizResult {...quiz} quiz={quiz} key={index} filter={filter}/>
                 )
               })}
         </section>

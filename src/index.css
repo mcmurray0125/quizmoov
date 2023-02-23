@@ -144,6 +144,13 @@ body a {
 .results-header {
   align-items: end !important;
 }
+
+.quiz-filters{
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--orange-color) !important;
+  border-radius: 0px !important;
+}
 @media screen and (max-width: 770px) {
   .results-header {
     flex-direction: column-reverse !important;
