@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Container, Form, Nav } from "react-bootstrap"
 import { db } from "../firebase"
 import { useAuth } from '../contexts/AuthContext'
@@ -23,6 +23,7 @@ export default function Results() {
         data: [wins, total - wins, total]
       }]
     })
+    const orderRef= useRef();
     
     //options for chart.js bar graph
     const options = {
@@ -88,6 +89,18 @@ export default function Results() {
         })
       }, [quizzes]);
 
+      //Changes order of quiz results from newest to oldest
+      function handleOrderChange() {
+        const resultsSection = document.getElementById("results-section")
+        if (orderRef.current.value === "recent") {
+          resultsSection.classList.remove("flex-column")
+          resultsSection.classList.add("flex-column-reverse")
+        } else {
+          resultsSection.classList.remove("flex-column-reverse")
+          resultsSection.classList.add("flex-column")
+        }
+      }
+
 
   return (
     <>
@@ -100,7 +113,24 @@ export default function Results() {
             </div>
             <p className="m-0" style={{color: "var(--orange-color)"}}>My score: <span style={{color: "var(--text-color)", whiteSpace: "nowrap"}}>{wins} / {total}</span></p>
         </header>
-        <section className="d-flex flex-column-reverse">
+        <section className="sort-wrapper d-flex justify-content-end gap-2">
+          <Form.Group className="mb-2">
+            <Form.Label>Order</Form.Label>
+            <Form.Select ref={orderRef} onChange={handleOrderChange}>
+              <option value="recent">Most Recent</option>
+              <option value="oldest">Oldest</option>
+            </Form.Select>
+          </Form.Group>
+          <Form.Group className="mb-2">
+            <Form.Label>Filter by</Form.Label>
+            <Form.Select >
+              <option value="all">All</option>
+              <option value="correct">Correct</option>
+              <option value="incorrect">Incorrect</option>
+            </Form.Select>
+          </Form.Group>
+        </section>
+        <section className="d-flex flex-column-reverse" id="results-section">
         {parsedQuizzes.map((quiz, index) => {
               return (
                   <QuizResult {...quiz} quiz={quiz} key={index}/>
