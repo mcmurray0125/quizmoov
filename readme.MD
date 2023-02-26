@@ -126,14 +126,22 @@ Visit the QuizMoov web app <a href ="https://quizmoov.netlify.app/">here</a>
 <details open>
   <summary>Viewing/Sorting your Results</summary>
 
-video here
+
+
+https://user-images.githubusercontent.com/116777356/221395643-0cb53752-b7be-4997-bbc7-d51271ccb0f4.mp4
+
+
 
 </details>
 
 <details open>
   <summary>Taking Quizzes</summary>
 
-video here
+
+
+https://user-images.githubusercontent.com/116777356/221395646-d884cb18-27ca-4cb6-be08-44e2bd381518.mp4
+
+
 
 </details>
 
