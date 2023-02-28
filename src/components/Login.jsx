@@ -59,8 +59,8 @@ export default function Login() {
         <form onSubmit={handleGoogleLogin} className="mb-3">
             <button disabled={loading} type="submit" className='bg-transparent login-button px-3'>Sign in with Google <i className="fa-brands fa-google"></i></button>
         </form>
-        <form onSubmit={handleDemoSubmit} className="mb-3">
-            <button disabled={loading} type='submit' className='bg-transparent login-button px-3'>Sign in as <i>Demo</i> User</button>
+        <form onSubmit={handleDemoSubmit} className="mb-3" id="demo-form">
+            <button id="demo-button" disabled={loading} type='submit' className='bg-transparent login-button px-3'>Sign in as <i>Demo</i> User</button>
         </form>
         {message && <p className='login-message m-0'>{message}</p>}
         <div className='w-100 text-center mt-2'>
