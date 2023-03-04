@@ -9,8 +9,9 @@ export default function () {
   const { currentUser } = useAuth()
   const [friendEmail, setFriendEmail] = useState()
   const [message, setMessage] = useState()
-  const [requests, setRequests] = useState()
-  const [invites, setInvites] = useState()
+  const [requests, setRequests] = useState([])
+  const [invites, setInvites] = useState([])
+  const [friends, setFriends] = useState([])
 
   const changeHandler = (e) => {
     setFriendEmail(e.target.value);
@@ -38,6 +39,20 @@ export default function () {
     } 
     getInvites()
   },[message])
+
+  useEffect(() => {
+    async function getFriends() {
+      const myDocRef = doc(db, "friends", currentUser.email);
+      const myDocSnap = await getDoc(myDocRef);
+      if (currentUser) {
+        invites.map((invite) => {
+          const [email, status] = Object.entries(invite)[0];
+
+        })
+      }
+    } 
+    getFriends()
+  },[invites, requests])
 
   useEffect(() => {
     console.log(invites)
@@ -89,6 +104,15 @@ export default function () {
             </Form>
             {message && <p className='mt-4 login-message'>{message}</p>}
             {requests && <h2 className='mb-4 text-decoration-underline'>My Requests:</h2>}
+            {invites!=[] && <h3 className='my-4 text-decoration-underline'>Invites Sent:</h3>}
+            {invites!=[] && invites.map((invite, index) => {
+              const [email, status] = Object.entries(invite)[0];
+              return (
+                <p key={index}>
+                  {email} ... {status}
+                </p>
+              );
+            })}
             <h2 className='mt-4 text-decoration-underline'>My Friends:</h2>
         </Container>
     </>
