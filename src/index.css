@@ -97,6 +97,27 @@ body a {
 .submit-btn:active {
   color: var(--orange-color) !important;
 }
+.invite-btn {
+  border: 1px solid var(--orange-color) !important;
+  color: var(--text-color) !important;
+  background-color: transparent;
+  height: 2.2rem !important;
+  width: 9rem !important;
+  min-width: auto !important;
+  cursor: pointer !important;
+  transition: 0.15s;
+}
+.invite-btn:active {
+  color: var(--orange-color) !important;
+}
+.invite-btn:hover {
+  background-color: rgb(54, 27, 0) !important;
+}
+.invite-btn:disabled {
+  color: grey !important;
+  border-color: lightgray !important;
+  cursor: default !important;
+}
 .login-button {
   border: 1px solid var(--text-color) !important;
   color: var(--text-color) !important;
@@ -145,13 +166,13 @@ body a {
   align-items: end !important;
 }
 
-.quiz-filters{
+.quiz-filters {
   background-color: var(--bg-color) !important;
   color: var(--text-color) !important;
   border: 1px solid var(--orange-color) !important;
   border-radius: 0px !important;
 }
-.email-input{
+.email-input {
   background-color: transparent !important;
   border: 1px solid var(--text-color) !important;
   border-radius: 0 !important;

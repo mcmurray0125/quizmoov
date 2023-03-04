@@ -13,7 +13,6 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
-    const [hasFolder, setHasFolder] = useState(false)
     const navigate = useNavigate()
 
 
@@ -21,12 +20,9 @@ export function AuthProvider({ children }) {
     async function loginGoogle() {
       try {
         const result = await signInWithPopup(auth, provider);
-        // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
-        // The signed-in user info.
         const user = result.user;
-        // IdP data available using getAdditionalUserInfo(result)
         console.log(user);
       } catch (error) {
         console.log(error);
@@ -72,21 +68,45 @@ export function AuthProvider({ children }) {
          const checkFolder = async () => {
            const docRef = doc(db, "users", currentUser.uid);
            const docSnap = await getDoc(docRef);
-           if (docSnap.exists()) {
-             setHasFolder(true);
-           } else {
-              try {
-                await setDoc(doc(db, "users", currentUser.uid), {
-                    quizzes: [],
-                    totalQuizzes: 0,
-                    wins: 0
-                  })
-            } catch(error) {
-                console.log(error)
-            }
+           if (!docSnap.exists()) {
+             try {
+               await setDoc(doc(db, "users", currentUser.uid), {
+                   quizzes: [],
+                   totalQuizzes: 0,
+                   wins: 0,
+                   name: currentUser.displayName,
+                   uid: currentUser.uid,
+                   email: currentUser.email
+                 })
+              } catch(error) {
+                  console.log(error)
+              }
            }
          };
          checkFolder();
+       }
+      }, [currentUser]);
+
+      //Create Friends document for user
+      useEffect(() => {
+       if(currentUser && !loading) {
+         const checkFriends = async () => {
+           const docRef = doc(db, "friends", currentUser.uid);
+           const docSnap = await getDoc(docRef);
+           if (!docSnap.exists()) {
+             try {
+               await setDoc(doc(db, "friends", currentUser.email), {
+                  myEmail: currentUser.email,
+                  myUID: currentUser.uid,
+                  sentInvites: [],
+                  requests: [],
+                 })
+           } catch(error) {
+               console.log(error)
+           }
+           }
+         };
+         checkFriends();
        }
       }, [currentUser]);
       
@@ -98,7 +118,6 @@ export function AuthProvider({ children }) {
         loginDemo,
         logout,
         upgradeDemo,
-        hasFolder
     }
 
   return (
