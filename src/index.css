@@ -103,6 +103,7 @@ body a {
   background-color: transparent;
   height: 2.2rem !important;
   width: 9rem !important;
+  white-space: nowrap !important;
   min-width: auto !important;
   cursor: pointer !important;
   transition: 0.15s;

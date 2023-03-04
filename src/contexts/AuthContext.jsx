@@ -91,8 +91,8 @@ export function AuthProvider({ children }) {
       useEffect(() => {
        if(currentUser && !loading) {
          const checkFriends = async () => {
-           const docRef = doc(db, "friends", currentUser.uid);
-           const docSnap = await getDoc(docRef);
+           let docRef = doc(db, "friends", currentUser.email);
+           let docSnap = await getDoc(docRef);
            if (!docSnap.exists()) {
              try {
                await setDoc(doc(db, "friends", currentUser.email), {
