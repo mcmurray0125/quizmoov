@@ -1,19 +1,20 @@
 import React from 'react'
 import Navigation from '../Navigation'
-import { Container } from "react-bootstrap"
+import { Container, Form, Button } from "react-bootstrap"
 
 export default function () {
   return (
     <>
         <Navigation/>
-        <Container className='my-5 text-center'>
-            <h1 className='pt-5'>Coming Soon!</h1>
-            <p className='mt-5 mb-4'>Check out the other pages for now...</p>
-            <div className="links d-flex gap-4 w-100 justify-content-center">
-                <a href='/' className='nav-link py-1 px-2'>Quiz</a>
-                <a href='/results' className='nav-link py-1 px-2'>Results</a>
-                <a href='/account' className='nav-link py-1 px-2'>My Account</a>
-            </div>
+        <Container className='my-5'>
+            <Form>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Add friend by email:</Form.Label>
+                <Form.Control type="email" placeholder="Enter email" className='email-input fs-2'/>
+              </Form.Group>
+              <button className="submit-btn" type="submit">Send Invite</button>
+            </Form>
+            <h2 className='mt-4 text-decoration-underline'>My Friends:</h2>
         </Container>
     </>
   )

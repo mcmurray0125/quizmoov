@@ -151,6 +151,12 @@ body a {
   border: 1px solid var(--orange-color) !important;
   border-radius: 0px !important;
 }
+.email-input{
+  background-color: transparent !important;
+  border: 1px solid var(--text-color) !important;
+  border-radius: 0 !important;
+  color: var(--orange-color) !important;
+}
 @media screen and (max-width: 770px) {
   .results-header {
     flex-direction: column-reverse !important;
