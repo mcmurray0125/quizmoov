@@ -207,8 +207,10 @@ const getClassname = (option) => {
               </label>
             </div>
           ))}
-          {checked && <p className="my-4" style={{color: winner ? 'rgb(51, 206, 90)' : 'rgb(220, 89, 53)'}}>{message}</p>}
-          <button className="submit-btn" type="submit">{checked ? 'Next Quote' : 'Submit'}</button>
+          {checked && <p className="my-4 result-message" style={{color: winner ? 'rgb(51, 206, 90)' : 'rgb(220, 89, 53)'}}>{message}</p>}
+          <button className="submit-btn" type="submit">
+            {checked ? 'Next Quote' : 'Submit'}
+          </button>
         </Form>
       </section>
       </Container>

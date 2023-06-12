@@ -49,7 +49,7 @@ function handleLogout(e) {
                     <div className='profile-text d-flex flex-column'>
                         <p>Name: {currentUser.email? currentUser.displayName : 'Demo User'}</p>
                         <p>Google Login: {currentUser.email? currentUser.email : 'N/A - Demo account.'}</p>
-                        <p>Total Quizzes: {total}</p>
+                        <p id="quiz-counter">Total Quizzes: {total}</p>
                         <p>Score: {total>0 ? `${((wins / total) * 100).toFixed(2)} %`: 'No Quizzes taken.'}</p>
                     </div>
                 </section>

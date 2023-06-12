@@ -21,7 +21,7 @@ export default function Navigation() {
           <Nav >
             <Nav.Link href="/">Play</Nav.Link>
             <Nav.Link href="/results">Results</Nav.Link>
-            <NavDropdown title="Profile" id="collasible-nav-dropdown">
+            <NavDropdown title="Profile" id="collapsible-nav-dropdown">
               <NavDropdown.Item eventKey={2} href="/account">My Account</NavDropdown.Item>
               <NavDropdown.Item href="/results">Results</NavDropdown.Item>
               <NavDropdown.Divider />
