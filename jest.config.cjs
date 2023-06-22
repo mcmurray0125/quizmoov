@@ -1,8 +1,8 @@
-module.exports = {
-    transform: {
-      '^.+\\.jsx?$': 'babel-jest',
-    },
-    testMatch: ['**/tests/**/*.test.js'],
-    moduleFileExtensions: ['js', 'jsx'],
-};
+module.exports = {  
+  transformIgnorePatterns: ['node_modules/(?!(sucrase)/)'],
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx|mjs)$': 'babel-jest',
+  },
+  // ...the rest of your config
+}
   

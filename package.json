@@ -25,6 +25,7 @@
     "tsparticles": "^2.9.3"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.22.5",
     "@babel/preset-react": "^7.22.5",
     "@testing-library/cypress": "^9.0.0",
     "@testing-library/react": "^14.0.0",

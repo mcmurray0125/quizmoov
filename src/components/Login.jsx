@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Container, Image } from 'react-bootstrap'
 import bannerLogo from "../assets/banner-logo.png"
 
