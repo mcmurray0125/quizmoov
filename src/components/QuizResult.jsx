@@ -27,7 +27,7 @@ export default function QuizResult({quiz, correctQuote, id, options, win, filter
   };
 
   return (
-    <div className='quiz-result' hidden={getHidden(win)}>
+    <div className='quiz-result p-3 border' hidden={getHidden(win)}>
       <div className='my-2 d-flex align-items-center justify-content-between'>
         <h5 className='m-0'>{correctQuote}</h5>
         {win ? <i className="fa-solid fa-check fs-2" style={{color: "var(--correct-color)"}}></i> : <i className="fa-solid fa-xmark fs-2" style={{color: "var(--incorrect-color)"}}></i>}

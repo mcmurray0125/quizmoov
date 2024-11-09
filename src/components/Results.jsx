@@ -8,6 +8,8 @@ import QuizResult from "./QuizResult";
 import { Bar } from "react-chartjs-2"
 import { Chart as ChartJS } from "chart.js/auto"
 
+import "../styles/results.scss"
+
 export default function Results() {
     const { currentUser } = useAuth()
     const [quizzes, setQuizzes] = useState([])
@@ -115,12 +117,10 @@ export default function Results() {
         }
       }
 
-
-
   return (
     <>
     <Navigation />
-    <Container>
+    <Container className='results-page'>
         <header className="d-flex justify-content-between results-header">
             <h2 className="fs-2 m-0">My Quizzes:</h2>
             <div style={{width: "300px"}} className="bar-graph">
@@ -143,7 +143,7 @@ export default function Results() {
             </Form.Select>
           </Form.Group>
         </section>
-        <section className="d-flex flex-column-reverse" id="results-section">
+        <section className="d-flex flex-column-reverse gap-3 mt-3 mx-auto col-lg-6" id="results-section">
         {parsedQuizzes.map((quiz, index) => {
               return (
                   <QuizResult {...quiz} quiz={quiz} key={index} filter={filter}/>

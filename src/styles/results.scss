@@ -1,0 +1,39 @@
+.results-header {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    align-items: end;
+}
+
+.bar-graph {
+    border: 1px solid var(--text-color);
+    padding: 0.5rem;
+}
+
+.quiz-filters {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--orange-color) !important;
+    border-radius: 0px !important;
+}
+
+.result {
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid var(--text-color) !important;
+    color: var(--text-color) !important;
+    width: 100%;
+    cursor: default;
+}
+
+@media screen and (max-width: 770px) {
+    .results-header {
+        flex-direction: column-reverse !important;
+        align-items: center !important;
+        margin-top: 0 !important;
+        margin-bottom: 1.7rem !important;
+    }
+
+    .bar-graph {
+        margin: 1rem 0 !important;
+    }
+}

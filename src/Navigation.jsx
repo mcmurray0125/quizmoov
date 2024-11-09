@@ -2,6 +2,8 @@ import React from 'react'
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap"
 import { useAuth } from './contexts/AuthContext'
 
+import "./styles/navigation.scss"
+
 export default function Navigation() {
   const { logout } = useAuth()
 

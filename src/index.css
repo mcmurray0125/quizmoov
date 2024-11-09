@@ -16,30 +16,6 @@ body a {
   color: var(--text-color) !important;
 }
 
-.dropdown-menu {
-  background-color: var(--bg-color) !important;
-  border-radius: 0px !important;
-  border-color: var(--text-color) !important;
-}
-.dropdown-divider {
-  border-color: var(--text-color) !important;
-}
-.dropdown-item:hover {
-  background-color: transparent !important;
-  color: var(--orange-color) !important;
-}
-.nav-link {
-  border: var(--text-color) 1px solid !important;
-  cursor: pointer;
-}
-.navbar-brand {
-  color: var(--orange-color) !important;
-}
-.nav-link:hover {
-  background-color: transparent !important;
-  color: var(--orange-color) !important;
-}
-
 .option {
   border: 1px solid var(--text-color) !important;
   color: var(--text-color) !important;
@@ -49,15 +25,7 @@ body a {
   cursor: pointer !important;
   transition: 0.2s !important;
 }
-.result {
-  padding-left: 1rem;
-  border: 1px solid var(--text-color) !important;
-  color: var(--text-color) !important;
-  height: 2.5rem !important;
-  line-height: 2.5rem !important;
-  width: 100%;
-  cursor: default;
-}
+
 .option:hover {
   color: rgb(255, 179, 102) !important;
 }
@@ -130,35 +98,4 @@ body a {
 
 .slide-in {
   transform: translateX(0);
-}
-
-.results-header {
-  margin-top: 3rem !important;
-  margin-bottom: 2rem !important;
-}
-
-.bar-graph {
-  border: 1px solid var(--text-color);
-  padding: 0.5rem;
-}
-.results-header {
-  align-items: end !important;
-}
-
-.quiz-filters{
-  background-color: var(--bg-color) !important;
-  color: var(--text-color) !important;
-  border: 1px solid var(--orange-color) !important;
-  border-radius: 0px !important;
-}
-@media screen and (max-width: 770px) {
-  .results-header {
-    flex-direction: column-reverse !important;
-    align-items: center !important;
-    margin-top: 0 !important;
-    margin-bottom: 1.7rem !important;
-  }
-  .bar-graph {
-    margin: 1rem 0 !important;
-  }
 }
